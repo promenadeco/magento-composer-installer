@@ -31,7 +31,6 @@ class Copy extends DeploystrategyAbstract
         // if the source file is actually a folder, force recursion back into the create method using a glob to copy
         // all of this folder's contents into the folder at the destination
         if (is_dir($sourcePath)) {
-            echo "Match {$sourcePath} is a directory, making this a glob pattern and recursing:\n";
             return $this->create($source.'/*', $dest);
         }
 
