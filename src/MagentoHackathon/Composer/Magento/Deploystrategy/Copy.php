@@ -28,6 +28,12 @@ class Copy extends DeploystrategyAbstract
         $sourcePath = $this->getSourceDir() . '/' . $this->removeTrailingSlash($source);
         $destPath = $this->getDestDir() . '/' . $this->removeTrailingSlash($dest);
 
+        // if the source file is actually a folder, force recursion back into the create method using a glob to copy
+        // all of this folder's contents into the folder at the destination
+        if (is_dir($sourcePath)) {
+            echo "Match {$sourcePath} is a directory, making this a glob pattern and recursing:\n";
+            return $this->create($source.'/*', $dest);
+        }
 
         // Create all directories up to one below the target if they don't exist
         $destDir = dirname($destPath);
