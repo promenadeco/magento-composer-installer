@@ -365,7 +365,7 @@ abstract class DeploystrategyAbstract
         // If source doesn't exist, check if it's a glob expression, otherwise we have nothing we can do
         if (!file_exists($sourcePath)) {
             // Handle globing
-            $matches = glob($sourcePath);
+            $matches = glob($sourcePath, GLOB_MARK|GLOB_BRACE);
             if (!empty($matches)) {
                 foreach ($matches as $match) {
                     $absolutePath           = sprintf('%s/%s', $this->removeTrailingSlash($destPath), basename($match));
@@ -400,7 +400,7 @@ abstract class DeploystrategyAbstract
         // If source doesn't exist, check if it's a glob expression, otherwise we have nothing we can do
         if (!file_exists($sourcePath)) {
             // Handle globing
-            $matches = glob($sourcePath);
+            $matches = glob($sourcePath, GLOB_MARK|GLOB_BRACE);
             if (!empty($matches)) {
                 foreach ($matches as $match) {
                     $newDest = substr($destPath . '/' . basename($match), strlen($this->getDestDir()));
